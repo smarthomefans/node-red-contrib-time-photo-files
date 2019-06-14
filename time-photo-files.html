@@ -40,6 +40,11 @@
         <select type="text" id="node-input-encoding" style="width: 250px;">
         </select>
     </div>
+    <div class="form-row form-row-file-encoding">
+        <label for="node-input-clear"><i class="fa fa-flag"></i> <span data-i18n="file.label.clear"></span></label>
+        <select type="text" id="node-input-clear" style="width: 250px;">
+        </select>
+    </div>
     <div class="form-row">
             <label style="width: 100%;text-align: center;box-sizing: border-box;" >
               <a href="https://bbs.iobroker.cn" target="_blank">由smarthomefans小组开发，使用中如有疑惑请点击此链接访问开发组主页。</a>
@@ -184,6 +189,7 @@
                 fileType: { value: 'jpg' },
                 appendNewline: { value: false },
                 createDir: { value: true },
+                clear: {value: false},
                 overwriteFile: { value: "true" },
                 encoding: { value: "none" }
             },

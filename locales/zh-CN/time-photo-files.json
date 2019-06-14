@@ -17,6 +17,7 @@
             "type": "文件类型",
             "addnewline": "向每个有效载荷添加换行符（\\n）?",
             "createdir": "创建目录（如果不存在）?",
+            "clear": "是否清空msg.payload（输出msg.payload={}）?",
             "outputas": "输出",
             "breakchunks": "分拆成块",
             "breaklines": "分拆成行",
