@@ -29,7 +29,7 @@ module.exports = function(RED) {
 
         function processMsg(msg, done) {
             var date = moment().utc().utcOffset(8)
-            var filename = `${date.format("YYYY-MM-DD-HH-mm-ss")}.${n.fileType}`
+            var filename = `${date.format("YYYY-MM-DD-HH-mm-ss")}-${(Math.random() * 100).toFixed()}.${n.fileType}`
             var monthDir = date.format("YYYY-MM-DD")
             
             if ((!node.filename) && (!node.tout)) {
