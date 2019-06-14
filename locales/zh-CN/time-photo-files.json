@@ -1,0 +1,61 @@
+{
+    "common": {
+        "label": {
+            "payload": "内容",
+            "topic": "主题",
+            "name": "名称",
+            "username": "用户名",
+            "password": "密码",
+            "property": "属性"
+        }
+    },
+    "file": {
+        "label": {
+            "filename": "文件名",
+            "dirname":"文件目录",
+            "action": "行为",
+            "type": "文件类型",
+            "addnewline": "向每个有效载荷添加换行符（\\n）?",
+            "createdir": "创建目录（如果不存在）?",
+            "outputas": "输出",
+            "breakchunks": "分拆成块",
+            "breaklines": "分拆成行",
+            "filelabel": "文件",
+            "sendError": "发生错误时发送消息（传统模式）",
+            "deletelabel": "删除 __file__"
+        },
+        "action": {
+            "append": "追加至文件",
+            "overwrite": "复写文件",
+            "delete": "删除文件"
+        },
+        "type": {
+            "JPG": "jpg",
+            "PNG": "png", 
+            "MP3": "mp3", 
+            "WAV": "wav", 
+            "MOV": "mov", 
+            "TXT": "text"
+        },
+        "output": {
+            "utf8": "一个utf8字符串",
+            "buffer": "一个Buffer对象",
+            "lines": "每行一条信息",
+            "stream": "一个Buffer流"
+        },
+        "status": {
+            "wrotefile": "写入至文件: __file__",
+            "deletedfile": "删除文件: __file__",
+            "appendedfile": "追加至文件: __file__"
+        },
+        "errors": {
+            "nofilename": "未指定文件目录",
+            "invaliddelete": "警告：无效删除。请在配置对话框中使用特定的删除选项",
+            "deletefail": "无法删除文件: __error__",
+            "writefail": "无法写入文件: __error__",
+            "appendfail": "无法追加到文件: __error__",
+            "createfail": "文件创建失败: __error__"
+        },
+        "tip": "提示: 文件名应该是绝对路径，否则它将相对于Node-RED进程的工作目录。"
+    }
+}

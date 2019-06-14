@@ -1,0 +1,258 @@
+<script type="text/x-red" data-template-name="time-photo-files">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="common.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]common.label.name">
+    </div>
+    <div class="form-row node-input-dirname">
+        <label for="node-input-dirname"><i class="fa fa-file"></i> <span data-i18n="file.label.dirname"></span></label>
+        <input id="node-input-dirname" type="text">
+   </div>
+   <div class="form-row">
+    <label for="node-input-fileType"><i class="fa fa-random"></i> <span data-i18n="file.label.type"></span></label>
+    <select type="text" id="node-input-fileType" style="width: 250px;">
+        <option value="jpg" data-i18n="file.type.JPG"></option>
+        <option value="png" data-i18n="file.type.PNG"></option>
+        <option value="mp3" data-i18n="file.type.MP3"></option>
+        <option value="wav" data-i18n="file.type.WAV"></option>
+        <option value="mov" data-i18n="file.type.MOV"></option>
+        <option value="text" data-i18n="file.type.TXT"></option>
+    </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-overwriteFile"><i class="fa fa-random"></i> <span data-i18n="file.label.action"></span></label>
+        <select type="text" id="node-input-overwriteFile" style="width: 250px;">
+            <option value="false" data-i18n="file.action.append"></option>
+            <option value="true" data-i18n="file.action.overwrite"></option>
+        </select>
+    </div>
+    <div class="form-row form-row-file-write-options">
+        <label>&nbsp;</label>
+        <input type="checkbox" id="node-input-appendNewline" style="display: inline-block; width: auto; vertical-align: top;">
+        <label for="node-input-appendNewline" style="width: 70%;"><span data-i18n="file.label.addnewline"></span></label>
+    </div>
+    <div class="form-row form-row-file-write-options">
+        <label>&nbsp;</label>
+        <input type="checkbox" id="node-input-createDir" style="display: inline-block; width: auto; vertical-align: top;">
+        <label for="node-input-createDir" style="width: 70%;"><span data-i18n="file.label.createdir"></span></label>
+    </div>
+    <div class="form-row form-row-file-encoding">
+        <label for="node-input-encoding"><i class="fa fa-flag"></i> <span data-i18n="file.label.encoding"></span></label>
+        <select type="text" id="node-input-encoding" style="width: 250px;">
+        </select>
+    </div>
+    <div class="form-row">
+            <label style="width: 100%;text-align: center;box-sizing: border-box;" >
+              <a href="https://bbs.iobroker.cn" target="_blank">由smarthomefans小组开发，使用中如有疑惑请点击此链接访问开发组主页。</a>
+            </label>
+    </div>
+    
+    <div class="form-tips"><span data-i18n="file.tip"></span></div>
+</script>
+
+
+<script type="text/javascript">
+    (function () {
+        var encodings = [
+            ["file.encoding.native",
+                "utf8",
+                "ucs2",
+                "utf-16le",
+                "ascii",
+                "binary",
+                "base64",
+                "hex"
+            ],
+            ["file.encoding.unicode",
+                "utf-16be",
+            ],
+            ["file.encoding.japanese",
+                "Shift_JIS",
+                "Windows-31j",
+                "Windows932",
+                "EUC-JP"
+            ],
+            ["file.encoding.chinese",
+                "GB2312",
+                "GBK",
+                "GB18030",
+                "Windows936",
+                "EUC-CN"
+            ],
+            ["file.encoding.korean",
+                "KS_C_5601",
+                "Windows949",
+                "EUC-KR"
+            ],
+            ["file.encoding.taiwan",
+                "Big5",
+                "Big5-HKSCS",
+                "Windows950"
+            ],
+            ["file.encoding.windows",
+                "cp874",
+                "cp1250",
+                "cp1251",
+                "cp1252",
+                "cp1253",
+                "cp1254",
+                "cp1255",
+                "cp1256",
+                "cp1257",
+                "cp1258"
+            ],
+            ["file.encoding.iso",
+                "ISO-8859-1",
+                "ISO-8859-2",
+                "ISO-8859-3",
+                "ISO-8859-4",
+                "ISO-8859-5",
+                "ISO-8859-6",
+                "ISO-8859-7",
+                "ISO-8859-8",
+                "ISO-8859-9",
+                "ISO-8859-10",
+                "ISO-8859-11",
+                "ISO-8859-12",
+                "ISO-8859-13",
+                "ISO-8859-14",
+                "ISO-8859-15",
+                "ISO-8859-16"
+            ],
+            ["file.encoding.ibm",
+                "cp437",
+                "cp737",
+                "cp775",
+                "cp808",
+                "cp850",
+                "cp852",
+                "cp855",
+                "cp856",
+                "cp857",
+                "cp858",
+                "cp860",
+                "cp861",
+                "cp866",
+                "cp869",
+                "cp922",
+                "cp1046",
+                "cp1124",
+                "cp1125",
+                "cp1129",
+                "cp1133",
+                "cp1161",
+                "cp1162",
+                "cp1163"
+            ],
+            ["file.encoding.mac",
+                "maccroatian",
+                "maccyrillic",
+                "macgreek",
+                "maciceland",
+                "macroman",
+                "macromania",
+                "macthai",
+                "macturkish",
+                "macukraine",
+                "maccenteuro",
+                "macintosh"
+            ],
+            ["file.encoding.koi8",
+                "koi8-r",
+                "koi8-u",
+                "koi8-ru",
+                "koi8-t"
+            ],
+            ["file.encoding.misc",
+                "armscii8",
+                "rk1048",
+                "tcvn",
+                "georgianacademy",
+                "georgianps",
+                "pt154",
+                "viscii",
+                "iso646cn",
+                "iso646jp",
+                "hproman8",
+                "tis620"
+            ]
+        ];
+        RED.nodes.registerType('time-photo-files', {
+            category: 'storage-output',
+            defaults: {
+                name: { value: "" },
+                dirname: { value: "" },
+                fileType: { value: 'jpg' },
+                appendNewline: { value: false },
+                createDir: { value: true },
+                overwriteFile: { value: "true" },
+                encoding: { value: "none" }
+            },
+            color: "BurlyWood",
+            inputs: 1,
+            outputs: 1,
+            icon: "file-out.png",
+            label: function () {
+                return this.name || this.filename || this._("file.label.filelabel");
+            },
+            labelStyle: function () {
+                return this.name ? "node_label_italic" : "";
+            },
+            oneditprepare: function () {
+                var node = this;
+                var encSel = $("#node-input-encoding");
+                var label = node._("file.encoding.none");
+                $("<option/>", {
+                    value: "none",
+                    label: label
+                }).text(label).appendTo(encSel);
+                encodings.forEach(function (item) {
+                    if (Array.isArray(item)) {
+                        var group = $("<optgroup/>", {
+                            label: node._(item[0])
+                        }).appendTo(encSel);
+                        for (var i = 1; i < item.length; i++) {
+                            var enc = item[i];
+                            $("<option/>", {
+                                value: enc,
+                                label: enc
+                            }).text(enc).appendTo(group);
+                        }
+                    }
+                    else {
+                        $("<option/>", {
+                            value: item,
+                            label: item
+                        }).text(item).appendTo(encSel);
+                    }
+                });
+                encSel.val(node.encoding);
+                $("#node-input-overwriteFile").on("change", function () {
+                    if (this.value === "delete") {
+                        $(".form-row-file-write-options").hide();
+                        $(".form-row-file-encoding").hide();
+                    } else {
+                        $(".form-row-file-write-options").show();
+                        $(".form-row-file-encoding").show();
+                    }
+                });
+            }
+        });
+    })();
+</script>
+
+
+<script type="text/x-red" data-help-name="time-photo-files">
+    <p>把 <code>msg.payload</code> 内容写到文件里面去, 或者像文件里面追加内容.</p>
+    <h3>输入</h3>
+    <dl class="message-properties">
+        <dt >payload <span class="property-type"></span></dt>
+        <dd>文件数据内容</dd>
+        <dt class="optional">dirname <span class="property-type">string</span></dt>
+        <dd>文件根目录</dd>
+    </dl>
+    <h3>输出</h3>
+    <p>原汁原味的输出</p>
+    <h3>详细</h3>
+    <p>文件会在你提供的目录按照xxxx-xx-xx/xxxx-xx-xx-xx-xx-xx.jpg(按照具体文件类型)存储在相关目录中 </p>
+    
+</script>

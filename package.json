@@ -3,12 +3,30 @@
   "version": "1.0.0",
   "description": "按照时间保存图片",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smarthomefans/node-red-contrib-time-photo-files.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "node-red"
   ],
+  "node-red": {
+    "nodes": {
+      "time-photo-files": "time-photo-files.js"
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/smarthomefans/node-red-contrib-time-photo-files/issues"
+  },
   "author": "yaming116",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^8.0.1",
+    "iconv-lite": "^0.4.24",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.24.0"
+  }
 }
