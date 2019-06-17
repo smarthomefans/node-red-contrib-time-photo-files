@@ -33,7 +33,7 @@ module.exports = function(RED) {
             var filename = `${date.format("YYYY-MM-DD-HH-mm-ss")}-${(Math.random() * 100).toFixed()}.${n.fileType}`
             var monthDir = date.format("YYYY-MM-DD")
             
-            if ((!node.filename) && (!node.tout)) {
+            if ((!node.filename) && (!node.tout) && (!node.dirname)) {
                 node.tout = setTimeout(function() {
                     node.status({fill:"grey",shape:"dot",text:filename});
                     clearTimeout(node.tout);

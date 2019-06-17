@@ -5,7 +5,7 @@
     </div>
     <div class="form-row node-input-dirname">
         <label for="node-input-dirname"><i class="fa fa-file"></i> <span data-i18n="file.label.dirname"></span></label>
-        <input id="node-input-dirname" type="text" >
+        <input id="node-input-dirname" type="text" data-i18n="[placeholder]file.label.dirname">
    </div>
    <div class="form-row">
     <label for="node-input-fileType"><i class="fa fa-random"></i> <span data-i18n="file.label.type"></span></label>
@@ -190,7 +190,7 @@
                 fileType: { value: 'jpg' },
                 appendNewline: { value: false },
                 createDir: { value: true },
-                clear: {value: false},
+                clear: { value: false },
                 overwriteFile: { value: "true" },
                 encoding: { value: "none" }
             },
@@ -259,6 +259,13 @@
     </dl>
     <h3>输出</h3>
     <p>原汁原味的输出</p>
+    <h3>新增输出信息</h3>
+    <dl class="message-properties">
+        <dt >shortname <span class="property-type">string</span></dt>
+        <dd>相对路径名称，以日期文件夹开始</dd>
+        <dt class="optional">fullname <span class="property-type">string</span></dt>
+        <dd>全部文件路径</dd>
+    </dl>
     <h3>详细</h3>
     <p>文件会在你提供的目录按照xxxx-xx-xx/xxxx-xx-xx-xx-xx-xx.jpg(按照具体文件类型)存储在相关目录中 </p>
     
