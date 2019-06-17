@@ -21,6 +21,7 @@ module.exports = function(RED) {
         this.overwriteFile = n.overwriteFile.toString();
         this.createDir = n.createDir || false;
         this.encoding = n.encoding || "none";
+        this.clear = n.clear;
         var node = this;
         node.wstream = null;
         node.msgQueue = [];
@@ -56,8 +57,18 @@ module.exports = function(RED) {
                         return;
                     }
                 }
+                //相对路径
+                msg.shortname = path.join(monthDir, filename)
+                // 绝对路径的文件
                 filename = path.join(dir, filename)
+                msg.fullname = filename
+                
                 var data = msg.payload;
+                //清空payload信息
+                if (n.clear) {
+                    msg.payload = {}
+                }
+
                 if ((typeof data === "object") && (!Buffer.isBuffer(data))) {
                     data = JSON.stringify(data);
                 }
@@ -82,7 +93,7 @@ module.exports = function(RED) {
                 }
                 else {
                     // Append mode
-                    var recreateStream = !node.wstream || !node.filename;
+                    var recreateStream = !node.wstream || !node.dirname;
                     if (node.wstream && node.wstreamIno) {
                         // There is already a stream open and we have the inode
                         // of the file. Check the file hasn't been deleted
@@ -120,14 +131,14 @@ module.exports = function(RED) {
                             done();
                         });
                     }
-                    if (node.filename) {
-                        // Static filename - write and reuse the stream next time
+                    if (node.dirname) {
+                        // Static dirname - write and reuse the stream next time
                         node.wstream.write(buf, function() {
                             node.send(msg);
                             done();
                         });
                     } else {
-                        // Dynamic filename - write and close the stream
+                        // Dynamic dirname - write and close the stream
                         node.wstream.end(buf, function() {
                             node.send(msg);
                             delete node.wstream;
